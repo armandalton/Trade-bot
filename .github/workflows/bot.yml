@@ -1,0 +1,72 @@
+name: XT Adaptive Signal Bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check = connection test, train = historical research, scan = signals"
+        required: true
+        default: "check"
+        type: choice
+        options:
+          - check
+          - train
+          - scan
+  schedule:
+    - cron: "*/15 * * * *"
+    - cron: "17 0 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: xt-adaptive-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Select mode
+        id: mode
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "17 0 * * *" ]; then
+              echo "mode=train" >> "$GITHUB_OUTPUT"
+            else
+              echo "mode=scan" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Run bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SYMBOLS: "btc_usdt,eth_usdt,sol_usdt,bnb_usdt,xrp_usdt"
+          PAPER_CAPITAL: "2000"
+          RISK_PCT: "0.005"
+          DAILY_LOSS_PCT: "0.015"
+          MAX_DRAWDOWN_PCT: "0.06"
+        run: python bot.py "${{ steps.mode.outputs.mode }}"
+      - name: Save bot state and model
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if ! git diff --cached --quiet; then
+            git commit -m "Update bot state/model"
+            git push
+          fi
