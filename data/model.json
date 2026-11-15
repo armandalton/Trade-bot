@@ -1,0 +1,168 @@
+{
+  "created_utc": "2026-11-15T05:39:47.736237+00:00",
+  "data_source": "XT USDT-M public futures klines",
+  "method": "chronological 60/20/20; train-select, validation-rank, untouched test gate",
+  "approved": false,
+  "symbols": [
+    {
+      "symbol": "btc_usdt",
+      "approved": false,
+      "params": {
+        "pullback": 0.004,
+        "rsi_long": 48,
+        "rsi_short": 52,
+        "atr_mult": 2.5
+      },
+      "train": {
+        "trades": 228,
+        "win_rate": 0.2675438596491228,
+        "profit_factor": 0.4302971215918445,
+        "expectancy_r": -0.5724468587010845,
+        "max_drawdown_r": 130.7987638725535
+      },
+      "validation": {
+        "trades": 52,
+        "win_rate": 0.28846153846153844,
+        "profit_factor": 0.49921442870537236,
+        "expectancy_r": -0.4653912545228611,
+        "max_drawdown_r": 26.180363079060132
+      },
+      "test": {
+        "trades": 67,
+        "win_rate": 0.417910447761194,
+        "profit_factor": 0.8511610147696953,
+        "expectancy_r": -0.1191292117553219,
+        "max_drawdown_r": 22.000690150471065
+      },
+      "validation_score": -4.39244571638188
+    },
+    {
+      "symbol": "eth_usdt",
+      "approved": false,
+      "params": {
+        "pullback": 0.004,
+        "rsi_long": 48,
+        "rsi_short": 52,
+        "atr_mult": 2.5
+      },
+      "train": {
+        "trades": 201,
+        "win_rate": 0.3582089552238806,
+        "profit_factor": 0.7782960440238341,
+        "expectancy_r": -0.1769219751138602,
+        "max_drawdown_r": 43.54083858648811
+      },
+      "validation": {
+        "trades": 66,
+        "win_rate": 0.3333333333333333,
+        "profit_factor": 0.6802331517781881,
+        "expectancy_r": -0.2696014673418672,
+        "max_drawdown_r": 20.54853873751488
+      },
+      "test": {
+        "trades": 70,
+        "win_rate": 0.32857142857142857,
+        "profit_factor": 0.674622822258199,
+        "expectancy_r": -0.27792475673952327,
+        "max_drawdown_r": 30.853719799263093
+      },
+      "validation_score": -3.3518822779690987
+    },
+    {
+      "symbol": "sol_usdt",
+      "approved": false,
+      "params": {
+        "pullback": 0.001,
+        "rsi_long": 52,
+        "rsi_short": 48,
+        "atr_mult": 2.5
+      },
+      "train": {
+        "trades": 205,
+        "win_rate": 0.3024390243902439,
+        "profit_factor": 0.6112863345463189,
+        "expectancy_r": -0.3378034013768425,
+        "max_drawdown_r": 84.13335267837772
+      },
+      "validation": {
+        "trades": 68,
+        "win_rate": 0.27941176470588236,
+        "profit_factor": 0.5697873543653574,
+        "expectancy_r": -0.3736559632456506,
+        "max_drawdown_r": 26.25021075491868
+      },
+      "test": {
+        "trades": 58,
+        "win_rate": 0.3793103448275862,
+        "profit_factor": 0.9153240600727282,
+        "expectancy_r": -0.0632042813596066,
+        "max_drawdown_r": 17.571455779644506
+      },
+      "validation_score": -4.311187576483452
+    },
+    {
+      "symbol": "bnb_usdt",
+      "approved": false,
+      "params": {
+        "pullback": 0.0025,
+        "rsi_long": 48,
+        "rsi_short": 52,
+        "atr_mult": 2.5
+      },
+      "train": {
+        "trades": 257,
+        "win_rate": 0.29571984435797666,
+        "profit_factor": 0.5112319692483243,
+        "expectancy_r": -0.47077726063032965,
+        "max_drawdown_r": 122.6881857635387
+      },
+      "validation": {
+        "trades": 74,
+        "win_rate": 0.2972972972972973,
+        "profit_factor": 0.5253031209337946,
+        "expectancy_r": -0.4405576804926169,
+        "max_drawdown_r": 34.576559780482576
+      },
+      "test": {
+        "trades": 65,
+        "win_rate": 0.3230769230769231,
+        "profit_factor": 0.6000657685539524,
+        "expectancy_r": -0.3619702751837312,
+        "max_drawdown_r": 33.54198777874809
+      },
+      "validation_score": -5.627041647565004
+    },
+    {
+      "symbol": "xrp_usdt",
+      "approved": false,
+      "params": {
+        "pullback": 0.004,
+        "rsi_long": 48,
+        "rsi_short": 52,
+        "atr_mult": 2.5
+      },
+      "train": {
+        "trades": 229,
+        "win_rate": 0.29694323144104806,
+        "profit_factor": 0.581837339497524,
+        "expectancy_r": -0.37225236702303854,
+        "max_drawdown_r": 86.77894804696545
+      },
+      "validation": {
+        "trades": 72,
+        "win_rate": 0.3194444444444444,
+        "profit_factor": 0.7217244744897211,
+        "expectancy_r": -0.22379550135636161,
+        "max_drawdown_r": 21.519254807251873
+      },
+      "test": {
+        "trades": 58,
+        "win_rate": 0.41379310344827586,
+        "profit_factor": 1.034345594889864,
+        "expectancy_r": 0.024607537011633398,
+        "max_drawdown_r": 12.843190507901916
+      },
+      "validation_score": -3.4516837224441423
+    }
+  ]
+}
