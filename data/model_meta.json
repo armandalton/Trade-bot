@@ -1,0 +1,236 @@
+{
+  "params": {
+    "horizon": 240,
+    "min_stop_pct": 0.004,
+    "min_stop_atr": 0.8,
+    "max_cost_r": 0.5,
+    "stop_buffer_atr": 0.1,
+    "fee_rate": 0.0006,
+    "slippage_rate": 0.0003
+  },
+  "created_utc": "2026-11-15T21:00:52+00:00",
+  "approved": false,
+  "threshold": 0.35,
+  "enabled_symbols": [],
+  "reasons": [
+    "معاملات آزمون 19 است (< 100): نمونه آماری کافی نیست",
+    "Win Rate آزمون 36.8% (< 50%)",
+    "Profit Factor آزمون 0.60 (< 1.4)",
+    "سود خالص آزمون پس از کارمزد منفی یا صفر است"
+  ],
+  "calibrated": true,
+  "bounds_ms": {
+    "start": 1778973000000.0,
+    "train_end": 1788453960000.0,
+    "val_end": 1791614280000.0,
+    "end": 1794774600000.0
+  },
+  "counts": {
+    "bnb_usdt": {
+      "valid_reversal": 1039,
+      "weak_reversal": 1600,
+      "true_break": 2637,
+      "false_break": 46,
+      "no_setup": 9966,
+      "total": 15296,
+      "no_setup_cost": 0,
+      "pending_or_gap": 8,
+      "ambiguous": 0,
+      "longs": 7622,
+      "shorts": 7674
+    },
+    "btc_usdt": {
+      "valid_reversal": 957,
+      "weak_reversal": 1702,
+      "true_break": 2422,
+      "false_break": 80,
+      "no_setup": 9920,
+      "total": 15083,
+      "no_setup_cost": 0,
+      "pending_or_gap": 2,
+      "ambiguous": 1,
+      "longs": 7327,
+      "shorts": 7756
+    },
+    "eth_usdt": {
+      "valid_reversal": 1453,
+      "weak_reversal": 1177,
+      "true_break": 2896,
+      "false_break": 130,
+      "no_setup": 10202,
+      "total": 15860,
+      "no_setup_cost": 0,
+      "pending_or_gap": 2,
+      "ambiguous": 2,
+      "longs": 7808,
+      "shorts": 8052
+    },
+    "sol_usdt": {
+      "valid_reversal": 1552,
+      "weak_reversal": 716,
+      "true_break": 3219,
+      "false_break": 191,
+      "no_setup": 10117,
+      "total": 15799,
+      "no_setup_cost": 0,
+      "pending_or_gap": 4,
+      "ambiguous": 0,
+      "longs": 7828,
+      "shorts": 7971
+    },
+    "xrp_usdt": {
+      "valid_reversal": 1514,
+      "weak_reversal": 879,
+      "true_break": 3020,
+      "false_break": 251,
+      "no_setup": 9898,
+      "total": 15568,
+      "no_setup_cost": 0,
+      "pending_or_gap": 6,
+      "ambiguous": 2,
+      "longs": 7700,
+      "shorts": 7868
+    }
+  },
+  "segments": {
+    "train": {
+      "trades": 99,
+      "long": 55,
+      "short": 44,
+      "wins": 65,
+      "losses": 34,
+      "win_rate": 0.6565656565656566,
+      "net_pnl": 656.0666023668351,
+      "profit_factor": 2.1821895056463645,
+      "max_dd_pct": 0.018187827685819963,
+      "avg_win": 18.63116176645872,
+      "avg_loss": -16.32232095449947
+    },
+    "val": {
+      "trades": 31,
+      "long": 12,
+      "short": 19,
+      "wins": 14,
+      "losses": 17,
+      "win_rate": 0.45161290322580644,
+      "net_pnl": -11.415518187373978,
+      "profit_factor": 0.9535577081715537,
+      "max_dd_pct": 0.026288381634297,
+      "avg_win": 16.741753093360593,
+      "avg_loss": -14.458827146730723
+    },
+    "test": {
+      "trades": 19,
+      "long": 11,
+      "short": 8,
+      "wins": 7,
+      "losses": 12,
+      "win_rate": 0.3684210526315789,
+      "net_pnl": -68.8142201380774,
+      "profit_factor": 0.597170836407039,
+      "max_dd_pct": 0.04192126879623961,
+      "avg_win": 14.573297747371459,
+      "avg_loss": -14.235608697473134
+    }
+  },
+  "baseline": {
+    "train": {
+      "trades": 18,
+      "long": 7,
+      "short": 11,
+      "wins": 4,
+      "losses": 14,
+      "win_rate": 0.2222222222222222,
+      "net_pnl": -138.21400770452624,
+      "profit_factor": 0.2685637829180908,
+      "max_dd_pct": 0.07137948465801011,
+      "avg_win": 12.687120180309911,
+      "avg_loss": -13.497320601840423
+    },
+    "val": {
+      "trades": 14,
+      "long": 7,
+      "short": 7,
+      "wins": 3,
+      "losses": 11,
+      "win_rate": 0.21428571428571427,
+      "net_pnl": -123.92848541963515,
+      "profit_factor": 0.212739717969234,
+      "max_dd_pct": 0.07078248741666103,
+      "avg_win": 11.162979444155079,
+      "avg_loss": -14.310674886554581
+    },
+    "test": {
+      "trades": 44,
+      "long": 21,
+      "short": 23,
+      "wins": 15,
+      "losses": 29,
+      "win_rate": 0.3409090909090909,
+      "net_pnl": -134.9642397834994,
+      "profit_factor": 0.5959372020878798,
+      "max_dd_pct": 0.06748211989174968,
+      "avg_win": 13.270249386002481,
+      "avg_loss": -11.51786139908747
+    }
+  },
+  "test_brier": 0.1805504373547384,
+  "data_quality": {
+    "btc_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "eth_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "sol_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "bnb_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "xrp_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    }
+  },
+  "validation_threshold_info": [
+    0.35,
+    -0.02971513807008958,
+    31
+  ],
+  "setup_sizes": {
+    "train": 16376,
+    "val": 5532,
+    "test": 5551
+  },
+  "purged": 22,
+  "costs": {
+    "fee_rate": 0.0006,
+    "slippage_rate": 0.0003,
+    "max_cost_r": 0.5
+  }
+}
