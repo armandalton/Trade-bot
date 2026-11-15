@@ -1,0 +1,220 @@
+{
+  "created_utc": "2026-11-15T20:37:04+00:00",
+  "approved": false,
+  "threshold": null,
+  "enabled_symbols": [],
+  "reasons": [
+    "داده کافی نیست: setup آموزشی=74، اعتبارسنجی=21"
+  ],
+  "calibrated": false,
+  "bounds_ms": {
+    "start": 1778970960000.0,
+    "train_end": 1788452172000.0,
+    "val_end": 1791612576000.0,
+    "end": 1794772980000.0
+  },
+  "counts": {
+    "bnb_usdt": {
+      "valid_reversal": 0,
+      "weak_reversal": 1,
+      "true_break": 4,
+      "false_break": 0,
+      "no_setup": 15292,
+      "total": 15297,
+      "no_setup_cost": 5326,
+      "pending_or_gap": 0,
+      "ambiguous": 0,
+      "longs": 7624,
+      "shorts": 7673
+    },
+    "btc_usdt": {
+      "valid_reversal": 2,
+      "weak_reversal": 4,
+      "true_break": 0,
+      "false_break": 2,
+      "no_setup": 15075,
+      "total": 15083,
+      "no_setup_cost": 5156,
+      "pending_or_gap": 0,
+      "ambiguous": 0,
+      "longs": 7326,
+      "shorts": 7757
+    },
+    "eth_usdt": {
+      "valid_reversal": 7,
+      "weak_reversal": 4,
+      "true_break": 1,
+      "false_break": 3,
+      "no_setup": 15846,
+      "total": 15861,
+      "no_setup_cost": 5644,
+      "pending_or_gap": 0,
+      "ambiguous": 0,
+      "longs": 7808,
+      "shorts": 8053
+    },
+    "sol_usdt": {
+      "valid_reversal": 6,
+      "weak_reversal": 9,
+      "true_break": 11,
+      "false_break": 6,
+      "no_setup": 15771,
+      "total": 15803,
+      "no_setup_cost": 5651,
+      "pending_or_gap": 0,
+      "ambiguous": 0,
+      "longs": 7829,
+      "shorts": 7974
+    },
+    "xrp_usdt": {
+      "valid_reversal": 14,
+      "weak_reversal": 8,
+      "true_break": 12,
+      "false_break": 14,
+      "no_setup": 15517,
+      "total": 15565,
+      "no_setup_cost": 5621,
+      "pending_or_gap": 0,
+      "ambiguous": 0,
+      "longs": 7702,
+      "shorts": 7863
+    }
+  },
+  "segments": {
+    "train": {
+      "trades": 0,
+      "long": 0,
+      "short": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": null,
+      "net_pnl": 0.0,
+      "profit_factor": null,
+      "max_dd_pct": 0.0,
+      "avg_win": null,
+      "avg_loss": null
+    },
+    "val": {
+      "trades": 0,
+      "long": 0,
+      "short": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": null,
+      "net_pnl": 0.0,
+      "profit_factor": null,
+      "max_dd_pct": 0.0,
+      "avg_win": null,
+      "avg_loss": null
+    },
+    "test": {
+      "trades": 0,
+      "long": 0,
+      "short": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": null,
+      "net_pnl": 0.0,
+      "profit_factor": null,
+      "max_dd_pct": 0.0,
+      "avg_win": null,
+      "avg_loss": null
+    }
+  },
+  "baseline": {
+    "train": {
+      "trades": 48,
+      "long": 27,
+      "short": 21,
+      "wins": 16,
+      "losses": 32,
+      "win_rate": 0.3333333333333333,
+      "net_pnl": -129.5140268692354,
+      "profit_factor": 0.6075387357552043,
+      "max_dd_pct": 0.06475701343461776,
+      "avg_win": 12.530661512880803,
+      "avg_loss": -10.312644096104009
+    },
+    "val": {
+      "trades": 20,
+      "long": 6,
+      "short": 14,
+      "wins": 10,
+      "losses": 10,
+      "win_rate": 0.5,
+      "net_pnl": 7.131729175387601,
+      "profit_factor": 1.0588325488216122,
+      "max_dd_pct": 0.04949478945394515,
+      "avg_win": 12.835253837425308,
+      "avg_loss": -12.122080919886548
+    },
+    "test": {
+      "trades": 13,
+      "long": 3,
+      "short": 10,
+      "wins": 5,
+      "losses": 8,
+      "win_rate": 0.38461538461538464,
+      "net_pnl": -34.76908009122859,
+      "profit_factor": 0.5719693147759312,
+      "max_dd_pct": 0.03717006905649885,
+      "avg_win": 9.292252916287513,
+      "avg_loss": -10.153793084083267
+    }
+  },
+  "test_brier": null,
+  "data_quality": {
+    "btc_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "eth_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "sol_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "bnb_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "xrp_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    }
+  },
+  "validation_threshold_info": null,
+  "setup_sizes": {
+    "train": 74,
+    "val": 21,
+    "test": 13
+  },
+  "purged": 0,
+  "costs": {
+    "fee_rate": 0.0006,
+    "slippage_rate": 0.0003,
+    "max_cost_r": 0.35
+  }
+}
