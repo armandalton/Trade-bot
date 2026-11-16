@@ -30,6 +30,32 @@ def summarize(executed, initial):
             "avg_loss": float(losses.mean()) if len(losses) else None}
 
 
+def signal_stats(trades):
+    """Metrics for selected signal rows, measured in net R after fees/slippage.
+
+    Returns the compact schema consumed by training, reports and hour analysis.
+    """
+    empty = {"n": 0, "win_rate": None, "mean_r": None, "pf": None}
+    if trades is None or len(trades) == 0:
+        return empty
+    if "net_r" not in trades.columns:
+        raise ValueError("signal_stats requires a 'net_r' column")
+    values = pd.to_numeric(trades["net_r"], errors="coerce").dropna().to_numpy(dtype=float)
+    if len(values) == 0:
+        return empty
+    wins = values[values > 0]
+    losses = values[values < 0]
+    gross_loss = float(-losses.sum())
+    gross_profit = float(wins.sum())
+    pf = (gross_profit / gross_loss) if gross_loss > 0 else (999.0 if gross_profit > 0 else None)
+    return {
+        "n": int(len(values)),
+        "win_rate": float(len(wins) / len(values)),
+        "mean_r": float(values.mean()),
+        "pf": float(pf) if pf is not None else None,
+    }
+
+
 def simulate(trades, cfg=CFG):
     """trades: resolved setups (columns entry_time, exit_time, symbol, side_name, entry, distance, net_r).
     Applies: risk-based sizing, max concurrent positions, one position per symbol, daily loss lock,
