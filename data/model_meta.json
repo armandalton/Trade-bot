@@ -1,0 +1,731 @@
+{
+  "params": {
+    "horizon": 240,
+    "min_stop_pct": 0.004,
+    "min_stop_atr": 0.8,
+    "max_cost_r": 0.5,
+    "stop_buffer_atr": 0.1,
+    "fee_rate": 0.0006,
+    "slippage_rate": 0.0003,
+    "rr": 2.0
+  },
+  "created_utc": "2026-11-16T10:11:11+00:00",
+  "approved": false,
+  "chosen_rr": 2.0,
+  "thresholds": {},
+  "enabled_kinds": [],
+  "enabled_symbols": [],
+  "hour_filter": false,
+  "trade_hours_utc": [],
+  "best_window": {
+    "label": "22:00–01:00 UTC = 01:30–04:30 به وقت تهران",
+    "basis": "performance",
+    "stable": false,
+    "hours_utc": [
+      22,
+      23,
+      0
+    ]
+  },
+  "reasons": [
+    "[حالت برگشت] روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.38R)؛ این حالت غیرفعال شد",
+    "[حالت شکست] روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.34R)؛ این حالت غیرفعال شد",
+    "هیچ‌کدام از دو حالت (برگشت/شکست) روی اعتبارسنجی آستانه سودده نداشت"
+  ],
+  "bounds_ms": {
+    "start": 1779019920000.0,
+    "train_end": 1788501528000.0,
+    "val_end": 1791662064000.0,
+    "end": 1794822600000.0
+  },
+  "counts": {
+    "bnb_usdt": {
+      "valid_reversal": 5960,
+      "weak_reversal": 9627,
+      "true_break": 14718,
+      "false_break": 227,
+      "valid_breakout": 0,
+      "weak_breakout": 0,
+      "failed_breakout": 0,
+      "whipsaw": 0,
+      "total": 15281,
+      "react_reversal": 5325,
+      "react_breakout": 6332,
+      "react_neutral": 3624,
+      "cost_rejected": 0,
+      "pending_or_gap": 15,
+      "ambiguous": 1,
+      "longs": 7611,
+      "shorts": 7670
+    },
+    "btc_usdt": {
+      "valid_reversal": 5447,
+      "weak_reversal": 10675,
+      "true_break": 13760,
+      "false_break": 262,
+      "valid_breakout": 0,
+      "weak_breakout": 0,
+      "failed_breakout": 0,
+      "whipsaw": 0,
+      "total": 15081,
+      "react_reversal": 5160,
+      "react_breakout": 6382,
+      "react_neutral": 3539,
+      "cost_rejected": 0,
+      "pending_or_gap": 9,
+      "ambiguous": 21,
+      "longs": 7319,
+      "shorts": 7762
+    },
+    "eth_usdt": {
+      "valid_reversal": 7533,
+      "weak_reversal": 7269,
+      "true_break": 16357,
+      "false_break": 527,
+      "valid_breakout": 0,
+      "weak_breakout": 0,
+      "failed_breakout": 0,
+      "whipsaw": 0,
+      "total": 15851,
+      "react_reversal": 5661,
+      "react_breakout": 6688,
+      "react_neutral": 3502,
+      "cost_rejected": 0,
+      "pending_or_gap": 8,
+      "ambiguous": 10,
+      "longs": 7803,
+      "shorts": 8048
+    },
+    "sol_usdt": {
+      "valid_reversal": 8487,
+      "weak_reversal": 4228,
+      "true_break": 18098,
+      "false_break": 751,
+      "valid_breakout": 0,
+      "weak_breakout": 0,
+      "failed_breakout": 0,
+      "whipsaw": 0,
+      "total": 15798,
+      "react_reversal": 5672,
+      "react_breakout": 6033,
+      "react_neutral": 4093,
+      "cost_rejected": 0,
+      "pending_or_gap": 16,
+      "ambiguous": 1,
+      "longs": 7828,
+      "shorts": 7970
+    },
+    "xrp_usdt": {
+      "valid_reversal": 7978,
+      "weak_reversal": 5103,
+      "true_break": 17132,
+      "false_break": 865,
+      "valid_breakout": 0,
+      "weak_breakout": 0,
+      "failed_breakout": 0,
+      "whipsaw": 0,
+      "total": 15549,
+      "react_reversal": 5665,
+      "react_breakout": 6023,
+      "react_neutral": 3861,
+      "cost_rejected": 0,
+      "pending_or_gap": 10,
+      "ambiguous": 5,
+      "longs": 7686,
+      "shorts": 7863
+    }
+  },
+  "data_quality": {
+    "btc_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "eth_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "sol_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "bnb_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    },
+    "xrp_usdt": {
+      "n": 263519,
+      "sorted": true,
+      "missing": 0,
+      "max_gap_candles": 1,
+      "coverage": 1.0,
+      "ok": true
+    }
+  },
+  "rr_table": {
+    "1.0": {
+      "rr": 1.0,
+      "thresholds": {},
+      "gates_ok": false,
+      "gate_reasons": [
+        "هیچ‌کدام از دو حالت (برگشت/شکست) روی اعتبارسنجی آستانه سودده نداشت"
+      ],
+      "signals": {
+        "train": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "val": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "test": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        }
+      },
+      "segments": {
+        "train": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "val": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "test": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      },
+      "break_even": null,
+      "eligible": false,
+      "chosen": false
+    },
+    "1.5": {
+      "rr": 1.5,
+      "thresholds": {},
+      "gates_ok": false,
+      "gate_reasons": [
+        "هیچ‌کدام از دو حالت (برگشت/شکست) روی اعتبارسنجی آستانه سودده نداشت"
+      ],
+      "signals": {
+        "train": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "val": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "test": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        }
+      },
+      "segments": {
+        "train": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "val": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "test": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      },
+      "break_even": null,
+      "eligible": false,
+      "chosen": false
+    },
+    "2.0": {
+      "rr": 2.0,
+      "thresholds": {},
+      "gates_ok": false,
+      "gate_reasons": [
+        "هیچ‌کدام از دو حالت (برگشت/شکست) روی اعتبارسنجی آستانه سودده نداشت"
+      ],
+      "signals": {
+        "train": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "val": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "test": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        }
+      },
+      "segments": {
+        "train": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "val": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        },
+        "test": {
+          "trades": 0,
+          "long": 0,
+          "short": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_rate": null,
+          "net_pnl": 0.0,
+          "profit_factor": null,
+          "max_dd_pct": 0.0,
+          "avg_win": null,
+          "avg_loss": null
+        }
+      },
+      "break_even": null,
+      "eligible": true,
+      "chosen": true
+    },
+    "3.0": {
+      "rr": 3.0,
+      "thresholds": {
+        "REVERSAL": 0.275
+      },
+      "gates_ok": false,
+      "gate_reasons": [
+        "فقط 37 سیگنال در آزمون (حداقل 100 لازم است)",
+        "Win Rate آزمون 29.7% (کمتر از 50%)",
+        "Profit Factor آزمون 0.77 (کمتر از 1.4)",
+        "میانگین نتیجه هر معامله پس از کارمزد منفی یا صفر است"
+      ],
+      "signals": {
+        "train": {
+          "n": 141,
+          "win_rate": 0.41843971631205673,
+          "mean_r": 0.2575781224648339,
+          "pf": 1.3125467836423352
+        },
+        "val": {
+          "n": 33,
+          "win_rate": 0.45454545454545453,
+          "mean_r": 0.3387227089983456,
+          "pf": 1.4285611849124227
+        },
+        "test": {
+          "n": 37,
+          "win_rate": 0.2972972972972973,
+          "mean_r": -0.23597873976717482,
+          "pf": 0.7678594122992691
+        }
+      },
+      "segments": {
+        "train": {
+          "trades": 43,
+          "long": 15,
+          "short": 28,
+          "wins": 19,
+          "losses": 24,
+          "win_rate": 0.4418604651162791,
+          "net_pnl": 132.57302610904495,
+          "profit_factor": 1.3504038032726717,
+          "max_dd_pct": 0.058261640156156244,
+          "avg_win": 26.890347199274718,
+          "avg_loss": -15.76431544488228
+        },
+        "val": {
+          "trades": 26,
+          "long": 3,
+          "short": 23,
+          "wins": 13,
+          "losses": 13,
+          "win_rate": 0.5,
+          "net_pnl": 131.93516463234334,
+          "profit_factor": 1.686667662063498,
+          "max_dd_pct": 0.04278762237323395,
+          "avg_win": 24.928728875207625,
+          "avg_loss": -14.779870057335062
+        },
+        "test": {
+          "trades": 27,
+          "long": 4,
+          "short": 23,
+          "wins": 8,
+          "losses": 19,
+          "win_rate": 0.2962962962962963,
+          "net_pnl": -66.28225782799835,
+          "profit_factor": 0.7574864842816023,
+          "max_dd_pct": 0.04404798764040165,
+          "avg_win": 25.878925914523933,
+          "avg_loss": -14.384929744431043
+        }
+      },
+      "break_even": 0.36180637629314816,
+      "eligible": true,
+      "chosen": false
+    }
+  },
+  "kinds": {
+    "REVERSAL": {
+      "n_setups": {
+        "train": 45993,
+        "val": 15765,
+        "test": 15635
+      },
+      "thr": null,
+      "reasons": [
+        "روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.38R)؛ این حالت غیرفعال شد"
+      ],
+      "signals": {
+        "train": {
+          "model": {
+            "n": 0,
+            "win_rate": null,
+            "mean_r": null,
+            "pf": null
+          },
+          "all": {
+            "n": 45993,
+            "win_rate": 0.3213097645293849,
+            "mean_r": -0.4347436642864981,
+            "pf": 0.4850319472588251
+          }
+        },
+        "val": {
+          "model": {
+            "n": 0,
+            "win_rate": null,
+            "mean_r": null,
+            "pf": null
+          },
+          "all": {
+            "n": 15765,
+            "win_rate": 0.3149381541389153,
+            "mean_r": -0.44759835230601913,
+            "pf": 0.4758461716888894
+          }
+        },
+        "test": {
+          "model": {
+            "n": 0,
+            "win_rate": null,
+            "mean_r": null,
+            "pf": null
+          },
+          "all": {
+            "n": 15635,
+            "win_rate": 0.33584905660377357,
+            "mean_r": -0.40396448122272166,
+            "pf": 0.5262759126247096
+          }
+        }
+      },
+      "brier": 0.18117899700086948,
+      "calibrated": true
+    },
+    "BREAKOUT": {
+      "n_setups": {
+        "train": 45997,
+        "val": 15768,
+        "test": 15635
+      },
+      "thr": null,
+      "reasons": [
+        "روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.34R)؛ این حالت غیرفعال شد"
+      ],
+      "signals": {
+        "train": {
+          "model": {
+            "n": 0,
+            "win_rate": null,
+            "mean_r": null,
+            "pf": null
+          },
+          "all": {
+            "n": 45997,
+            "win_rate": 0.32154270930712875,
+            "mean_r": -0.43688469517418654,
+            "pf": 0.4822651844963674
+          }
+        },
+        "val": {
+          "model": {
+            "n": 0,
+            "win_rate": null,
+            "mean_r": null,
+            "pf": null
+          },
+          "all": {
+            "n": 15768,
+            "win_rate": 0.31798579401319127,
+            "mean_r": -0.44066765811487846,
+            "pf": 0.482432160563948
+          }
+        },
+        "test": {
+          "model": {
+            "n": 0,
+            "win_rate": null,
+            "mean_r": null,
+            "pf": null
+          },
+          "all": {
+            "n": 15635,
+            "win_rate": 0.3309242085065558,
+            "mean_r": -0.41966520581046,
+            "pf": 0.5113917948931037
+          }
+        }
+      },
+      "brier": 0.17945354995007604,
+      "calibrated": true
+    }
+  },
+  "auto": {
+    "segments": {
+      "train": {
+        "trades": 0,
+        "long": 0,
+        "short": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate": null,
+        "net_pnl": 0.0,
+        "profit_factor": null,
+        "max_dd_pct": 0.0,
+        "avg_win": null,
+        "avg_loss": null
+      },
+      "val": {
+        "trades": 0,
+        "long": 0,
+        "short": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate": null,
+        "net_pnl": 0.0,
+        "profit_factor": null,
+        "max_dd_pct": 0.0,
+        "avg_win": null,
+        "avg_loss": null
+      },
+      "test": {
+        "trades": 0,
+        "long": 0,
+        "short": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate": null,
+        "net_pnl": 0.0,
+        "profit_factor": null,
+        "max_dd_pct": 0.0,
+        "avg_win": null,
+        "avg_loss": null
+      }
+    },
+    "skipped": {
+      "train": {},
+      "val": {},
+      "test": {}
+    },
+    "signals": {
+      "train": {
+        "n": 0,
+        "win_rate": null,
+        "mean_r": null,
+        "pf": null
+      },
+      "val": {
+        "n": 0,
+        "win_rate": null,
+        "mean_r": null,
+        "pf": null
+      },
+      "test": {
+        "n": 0,
+        "win_rate": null,
+        "mean_r": null,
+        "pf": null
+      }
+    },
+    "by_kind": {
+      "train": {
+        "REVERSAL": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "BREAKOUT": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        }
+      },
+      "val": {
+        "REVERSAL": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "BREAKOUT": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        }
+      },
+      "test": {
+        "REVERSAL": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        },
+        "BREAKOUT": {
+          "n": 0,
+          "win_rate": null,
+          "mean_r": null,
+          "pf": null
+        }
+      }
+    },
+    "all_setups": {
+      "train": {
+        "n": 91990,
+        "win_rate": 0.3214262419828242,
+        "mean_r": -0.4358142262795517,
+        "pf": 0.4836488139288323
+      },
+      "val": {
+        "n": 31533,
+        "win_rate": 0.31646211904988425,
+        "mean_r": -0.44413267552277913,
+        "pf": 0.47913460461201685
+      },
+      "test": {
+        "n": 31270,
+        "win_rate": 0.3333866325551647,
+        "mean_r": -0.41181484351659087,
+        "pf": 0.5188070832468779
+      }
+    },
+    "cost_r": null,
+    "break_even": null
+  },
+  "purged": 211,
+  "costs": {
+    "fee_rate": 0.0006,
+    "slippage_rate": 0.0003,
+    "max_cost_r": 0.5
+  }
+}
