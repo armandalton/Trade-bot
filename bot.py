@@ -1,4 +1,4 @@
-"""XT SMA64 signal bot. Usage: python bot.py check | train | scan | live | selftest"""
+"""XT SMA64 + EMA 9/20 research bot. Usage: python bot.py check | train | scan | live | selftest"""
 import sys
 import time
 import unittest
@@ -21,7 +21,7 @@ def check():
     if not configured():
         log("Telegram secrets are missing (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID).")
         raise SystemExit(1)
-    sent = send("✅ تست اتصال بات XT SMA64: داده یک‌دقیقه‌ای XT " + ("سالم دریافت شد." if ok_all else "دریافت شد ولی کیفیت داده مشکل دارد؛ لاگ را ببینید."))
+    sent = send("✅ تست اتصال بات XT: داده یک‌دقیقه‌ای XT " + ("سالم دریافت شد." if ok_all else "دریافت شد ولی کیفیت داده مشکل دارد؛ لاگ را ببینید."))
     if not sent or not ok_all:
         raise SystemExit(1)
     log("Check complete.")
@@ -29,14 +29,22 @@ def check():
 
 def train():
     from xt_bot.train import run_training
+    from xt_bot.ema_strategy import run_ema_experiment
     from xt_bot.notifier import send
     from xt_bot.util import read_json
     from xt_bot.config import DATA_DIR
+
     state = read_json(DATA_DIR / "state.json", {})
     meta, results, text = run_training(state=state)
-    log(f"Training finished. approved={meta['approved']} reasons={meta['reasons']}")
+    log(f"SMA64 training finished. approved={meta['approved']} reasons={meta['reasons']}")
     if not send(text):
-        log("Report was not delivered to Telegram (see data/report_fa.md in the repository).")
+        log("SMA64 report was not delivered to Telegram (see data/report_fa.md).")
+
+    log("Starting independent EMA 9/20 experiment ...")
+    full, ema_text = run_ema_experiment()
+    log("EMA 9/20 experiment completed (see data/report_ema_fa.md).")
+    if not send(ema_text):
+        log("EMA report was not delivered to Telegram (see data/report_ema_fa.md).")
 
 
 def selftest():
