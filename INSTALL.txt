@@ -1,0 +1,11 @@
+این بسته Patch برای مخزن armadalton/Trade-bot است.
+
+فایل‌ها را با حفظ ساختار پوشه‌ها در ریشه مخزن آپلود و Commit کنید.
+- bot.py را جایگزین نسخه فعلی کنید.
+- xt_bot/telegram_image.py را اضافه کنید.
+- .github/workflows/telegram-image.yml را اضافه کنید.
+- telegram_image_offset.json را در ریشه اضافه کنید.
+- IMAGE_ANALYSIS_SETUP_FA.md راهنمای راه‌اندازی است.
+
+نیازی به تغییر requirements.txt نیست؛ پیاده‌سازی Gemini از REST API و کتابخانه requests موجود استفاده می‌کند.
+سپس Secret جدید GEMINI_API_KEY را در Settings > Secrets and variables > Actions اضافه کنید.
