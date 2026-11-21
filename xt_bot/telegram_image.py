@@ -1,6 +1,8 @@
-"""Image-only Telegram chart analysis through Gemini REST API.
+
+"""Image-only Telegram chart analysis through Gemini Interactions API.
 No live exchange data is requested and no orders are placed.
 """
+
 import base64
 import json
 import os
@@ -8,12 +10,22 @@ from pathlib import Path
 
 import requests
 
+
 ROOT = Path(__file__).resolve().parent.parent
 OFFSET_FILE = ROOT / "telegram_image_offset.json"
+
 TELEGRAM_API = "https://api.telegram.org"
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+
 MAX_IMAGE_BYTES = 10 * 1024 * 1024
-ALLOWED_MIME = {"image/jpeg", "image/png", "image/webp"}
+
+ALLOWED_MIME = {
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+}
+
 
 ANALYSIS_PROMPT = """
 تو یک تحلیلگر تکنیکال محتاط هستی. فقط همین تصویر پیوست‌شده را تحلیل کن.
@@ -50,160 +62,379 @@ ANALYSIS_PROMPT = """
 
 def _telegram(method, payload=None, timeout=25):
     token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+
     if not token:
         raise RuntimeError("TELEGRAM_BOT_TOKEN secret is missing")
+
     response = requests.post(
         f"{TELEGRAM_API}/bot{token}/{method}",
         json=payload or {},
         timeout=timeout,
     )
+
     response.raise_for_status()
+
     body = response.json()
+
     if not body.get("ok"):
-        raise RuntimeError(f"Telegram API returned ok=false for {method}")
+        raise RuntimeError(
+            f"Telegram API returned ok=false for {method}"
+        )
+
     return body.get("result")
 
 
 def _send(chat_id, text):
     if len(text) > 3900:
         text = text[:3880] + "\n… (پاسخ کوتاه شد)"
-    _telegram("sendMessage", {"chat_id": chat_id, "text": text}, timeout=20)
+
+    _telegram(
+        "sendMessage",
+        {
+            "chat_id": chat_id,
+            "text": text,
+        },
+        timeout=20,
+    )
 
 
 def _extract_image(message):
     photos = message.get("photo") or []
+
     if photos:
-        return max(photos, key=lambda item: item.get("file_size", 0)).get("file_id"), "image/jpeg"
+        largest = max(
+            photos,
+            key=lambda item: item.get("file_size", 0),
+        )
+
+        return largest.get("file_id"), "image/jpeg"
+
     document = message.get("document") or {}
+
     mime = document.get("mime_type", "")
+
     if mime in ALLOWED_MIME:
         return document.get("file_id"), mime
+
     return None, None
 
 
 def _download_telegram_image(file_id):
-    info = _telegram("getFile", {"file_id": file_id})
+    info = _telegram(
+        "getFile",
+        {"file_id": file_id},
+    )
+
     path = info.get("file_path")
+
     if not path:
-        raise RuntimeError("Telegram did not return an image file path")
+        raise RuntimeError(
+            "Telegram did not return an image file path"
+        )
+
     token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+
     response = requests.get(
         f"{TELEGRAM_API}/file/bot{token}/{path}",
         timeout=35,
         stream=True,
     )
+
     response.raise_for_status()
-    content_length = int(response.headers.get("Content-Length", "0") or 0)
+
+    content_length = int(
+        response.headers.get("Content-Length", "0") or 0
+    )
+
     if content_length > MAX_IMAGE_BYTES:
-        raise ValueError("حجم تصویر بیشتر از ۱۰ مگابایت است.")
-    chunks, total = [], 0
+        raise ValueError(
+            "حجم تصویر بیشتر از ۱۰ مگابایت است."
+        )
+
+    chunks = []
+    total = 0
+
     for chunk in response.iter_content(64 * 1024):
         if not chunk:
             continue
+
         total += len(chunk)
+
         if total > MAX_IMAGE_BYTES:
-            raise ValueError("حجم تصویر بیشتر از ۱۰ مگابایت است.")
+            raise ValueError(
+                "حجم تصویر بیشتر از ۱۰ مگابایت است."
+            )
+
         chunks.append(chunk)
+
     data = b"".join(chunks)
+
     if not data:
         raise ValueError("فایل تصویر خالی است.")
+
     return data
 
 
 def _gemini_analyze(image_bytes, mime_type, caption=""):
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
+
     if not api_key:
-        raise RuntimeError("GEMINI_API_KEY secret is missing")
+        raise RuntimeError(
+            "GEMINI_API_KEY secret is missing"
+        )
+
     prompt = ANALYSIS_PROMPT
+
     if caption.strip():
-        prompt += "\nتوضیح همراه عکس از کاربر (فقط به‌عنوان زمینه، نه منبع قیمت): " + caption[:500]
+        prompt += (
+            "\nتوضیح همراه عکس از کاربر "
+            "(فقط به‌عنوان زمینه، نه منبع قیمت): "
+            + caption[:500]
+        )
+
+    image_base64 = base64.b64encode(
+        image_bytes
+    ).decode("ascii")
+
+    # Gemini 3.8 Flash - Interactions API
     payload = {
-        "contents": [{
-            "role": "user",
-            "parts": [
-                {"text": prompt},
-                {"inline_data": {
-                    "mime_type": mime_type,
-                    "data": base64.b64encode(image_bytes).decode("ascii"),
-                }},
-            ],
-        }],
-        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 1300},
+        "model": GEMINI_MODEL,
+        "store": False,
+        "input": [
+            {
+                "type": "text",
+                "text": prompt,
+            },
+            {
+                "type": "image",
+                "data": image_base64,
+                "mime_type": mime_type,
+            },
+        ],
+        "generation_config": {
+            "temperature": 0.2,
+            "max_output_tokens": 1300,
+        },
     }
+
     response = requests.post(
-        f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent",
-        headers={"x-goog-api-key": api_key, "Content-Type": "application/json"},
+        "https://generativelanguage.googleapis.com/v1beta/interactions",
+        headers={
+            "x-goog-api-key": api_key,
+            "Content-Type": "application/json",
+            "Api-Revision": "2026-05-20",
+        },
         json=payload,
-        timeout=90,
+        timeout=120,
     )
+
     if response.status_code == 429:
-        raise RuntimeError("سهمیه رایگان Gemini فعلاً به سقف رسیده است؛ کمی بعد دوباره امتحان کن.")
+        raise RuntimeError(
+            "سهمیه رایگان Gemini فعلاً به سقف رسیده است؛ "
+            "کمی بعد دوباره امتحان کن."
+        )
+
     if response.status_code >= 400:
         try:
-            detail = response.json().get("error", {}).get("message", "خطای سرویس Gemini")
+            error_body = response.json()
+
+            detail = (
+                error_body.get("error", {}).get("message")
+                or "خطای سرویس Gemini"
+            )
+
         except Exception:
             detail = "خطای سرویس Gemini"
-        raise RuntimeError(f"Gemini API error {response.status_code}: {str(detail)[:250]}")
-    body = response.json()
-    candidates = body.get("candidates") or []
-    parts = candidates[0].get("content", {}).get("parts", []) if candidates else []
-    answer = "\n".join(p.get("text", "") for p in parts if p.get("text"))
-    if not answer.strip():
-        raise RuntimeError("Gemini پاسخ متنی قابل استفاده برنگرداند.")
-    return answer.strip()
+
+        raise RuntimeError(
+            f"Gemini API error {response.status_code}: "
+            f"{str(detail)[:250]}"
+        )
+
+    try:
+        body = response.json()
+
+    except Exception:
+        raise RuntimeError(
+            "پاسخ دریافتی از Gemini قابل خواندن نیست."
+        )
+
+    if body.get("status") == "failed":
+        error = body.get("error") or {}
+
+        detail = (
+            error.get("message")
+            or error.get("status")
+            or "تحلیل Gemini ناموفق بود."
+        )
+
+        raise RuntimeError(str(detail)[:250])
+
+    # First try the convenience output_text field.
+    answer = (body.get("output_text") or "").strip()
+
+    # Fallback: extract text from model_output steps.
+    if not answer:
+        text_parts = []
+
+        for step in body.get("steps") or []:
+
+            if step.get("type") != "model_output":
+                continue
+
+            for part in step.get("content") or []:
+
+                if (
+                    part.get("type") == "text"
+                    and part.get("text")
+                ):
+                    text_parts.append(part["text"])
+
+        answer = "\n".join(text_parts).strip()
+
+    if not answer:
+        raise RuntimeError(
+            "Gemini پاسخ متنی قابل استفاده برنگرداند."
+        )
+
+    return answer
 
 
 def _read_offset():
     try:
-        return int(json.loads(OFFSET_FILE.read_text(encoding="utf-8")).get("offset", 0))
+        data = json.loads(
+            OFFSET_FILE.read_text(encoding="utf-8")
+        )
+
+        return int(data.get("offset", 0))
+
     except Exception:
         return 0
 
 
 def _write_offset(offset):
     OFFSET_FILE.write_text(
-        json.dumps({"offset": int(offset)}, ensure_ascii=False, indent=2) + "\n",
+        json.dumps(
+            {"offset": int(offset)},
+            ensure_ascii=False,
+            indent=2,
+        ) + "\n",
         encoding="utf-8",
     )
 
 
 def poll_once():
     """Process queued Telegram updates once; called by scheduled GitHub Actions."""
-    allowed_chat = os.getenv("TELEGRAM_CHAT_ID", "").strip()
+
+    allowed_chat = os.getenv(
+        "TELEGRAM_CHAT_ID",
+        "",
+    ).strip()
+
     if not allowed_chat:
-        raise RuntimeError("TELEGRAM_CHAT_ID secret is missing")
+        raise RuntimeError(
+            "TELEGRAM_CHAT_ID secret is missing"
+        )
+
     offset = _read_offset()
-    updates = _telegram("getUpdates", {
-        "offset": offset, "timeout": 0, "allowed_updates": ["message"],
-    }, timeout=20) or []
+
+    updates = _telegram(
+        "getUpdates",
+        {
+            "offset": offset,
+            "timeout": 0,
+            "allowed_updates": ["message"],
+        },
+        timeout=20,
+    ) or []
+
     handled = 0
+
     for update in updates:
-        next_offset = int(update.get("update_id", 0)) + 1
+
+        next_offset = (
+            int(update.get("update_id", 0)) + 1
+        )
+
         message = update.get("message") or {}
-        chat_id = str((message.get("chat") or {}).get("id", ""))
+
+        chat_id = str(
+            (message.get("chat") or {}).get("id", "")
+        )
+
+        # Only accept messages from the authorized chat.
         if chat_id != allowed_chat:
+
             _write_offset(next_offset)
             offset = next_offset
+
             continue
 
-        text = (message.get("text") or "").strip()
+        text = (
+            message.get("text") or ""
+        ).strip()
+
+        # Start command.
         if text.startswith("/start"):
-            _send(chat_id, "سلام! عکس چارت را به‌صورت Photo یا فایل تصویر بفرست.\nمن فقط بر اساس همین تصویر تحلیل می‌کنم و از دیتای زنده صرافی استفاده نمی‌کنم.\nبرای خوانایی بهتر، نماد، تایم‌فریم، محور قیمت و MA100 در تصویر مشخص باشند.")
+
+            _send(
+                chat_id,
+                "سلام! عکس چارت را به‌صورت Photo یا فایل تصویر بفرست.\n"
+                "من فقط بر اساس همین عکس تحلیل می‌کنم و از دیتای زنده صرافی استفاده نمی‌کنم.\n"
+                "برای خوانایی بهتر، نماد، تایم‌فریم، محور قیمت و MA100 در تصویر مشخص باشند."
+            )
+
         else:
+
             file_id, mime = _extract_image(message)
+
             if not file_id:
+
                 if text:
-                    _send(chat_id, "برای تحلیل تصویری، لطفاً اسکرین‌شات چارت را به شکل عکس یا فایل PNG/JPG/WEBP بفرست.")
+                    _send(
+                        chat_id,
+                        "برای تحلیل تصویری، لطفاً اسکرین‌شات چارت را "
+                        "به شکل عکس یا فایل PNG/JPG/WEBP بفرست."
+                    )
+
             else:
+
                 try:
-                    _send(chat_id, "📥 تصویر دریافت شد؛ دارم فقط بر اساس همین عکس بررسی می‌کنم…")
-                    image_bytes = _download_telegram_image(file_id)
-                    result = _gemini_analyze(image_bytes, mime, message.get("caption") or "")
+
+                    _send(
+                        chat_id,
+                        "📥 تصویر دریافت شد؛ دارم فقط بر اساس همین عکس بررسی می‌کنم…"
+                    )
+
+                    image_bytes = _download_telegram_image(
+                        file_id
+                    )
+
+                    result = _gemini_analyze(
+                        image_bytes,
+                        mime,
+                        message.get("caption") or "",
+                    )
+
                     _send(chat_id, result)
+
                 except Exception as exc:
-                    _send(chat_id, f"❌ تحلیل انجام نشد: {str(exc)[:700]}")
+
+                    _send(
+                        chat_id,
+                        f"❌ تحلیل انجام نشد: {str(exc)[:700]}"
+                    )
+
         _write_offset(next_offset)
+
         offset = next_offset
+
         handled += 1
-    print(f"Image bot poll complete. handled={handled} next_offset={offset}", flush=True)
+
+    print(
+        f"Image bot poll complete. "
+        f"handled={handled} next_offset={offset}",
+        flush=True,
+    )
+
     return handled
