@@ -3,6 +3,8 @@
 import json
 import os
 import time
+from datetime import datetime, timezone
+
 import requests
 
 API = "https://api.telegram.org"
@@ -52,12 +54,19 @@ def download_image(file_id):
 
 
 def market_command(chat_id, command):
-    from xt_bot.data import fetch_klines, closed_only
+    from xt_bot.data import (
+        fetch_klines,
+        closed_only,
+        fetch_last_price
+    )
     from xt_bot.technical_engine import (
-        analyze_ohlcv, format_signal, INTERVALS
+        analyze_ohlcv,
+        format_signal,
+        INTERVALS
     )
 
     bits = command.strip().split()
+
     symbol = (
         bits[1] if len(bits) > 1 else "btc_usdt"
     ).lower().replace("/", "_")
@@ -67,23 +76,95 @@ def market_command(chat_id, command):
     ).lower()
 
     if timeframe not in INTERVALS:
-        send(chat_id, "تایم‌فریم معتبر: " + ", ".join(INTERVALS))
+        send(
+            chat_id,
+            "تایم‌فریم معتبر: " + ", ".join(INTERVALS)
+        )
         return
 
-    now = int(time.time() * 1000)
     step = INTERVALS[timeframe]
+
+    # دریافت کندل‌های اخیر
+    request_time = int(time.time() * 1000)
 
     df = fetch_klines(
         symbol,
-        now - step * 320,
-        now,
+        request_time - step * 320,
+        request_time,
         timeframe
     )
 
-    df = closed_only(df, now, step)
+    # فقط کندل‌های کاملاً بسته‌شده
+    df = closed_only(df, request_time, step)
 
+    if len(df) < 230:
+        send(
+            chat_id,
+            f"⛔ تعداد کندل کافی نیست: {len(df)}"
+        )
+        return
+
+    # بررسی تازگی آخرین کندل بسته‌شده
+    last_candle = df.iloc[-1]
+    candle_open_ms = int(last_candle["time"])
+    candle_close_ms = candle_open_ms + step
+
+    now_ms = int(time.time() * 1000)
+    candle_delay_ms = now_ms - candle_close_ms
+
+    if candle_delay_ms < 0 or candle_delay_ms > step * 2:
+        send(
+            chat_id,
+            "⛔ داده کندل به‌روز نیست.\n"
+            f"تأخیر نسبت به بسته‌شدن کندل: "
+            f"{candle_delay_ms / 1000:.1f} ثانیه\n"
+            "برای جلوگیری از سیگنال اشتباه، تحلیل متوقف شد."
+        )
+        return
+
+    # دریافت قیمت آخرین معامله از تیکر XT
+    ticker = fetch_last_price(symbol)
+
+    current_price = float(ticker["price"])
+    ticker_received_ms = int(ticker["received_at_ms"])
+
+    # تحلیل تکنیکال همچنان بر اساس کندل بسته‌شده انجام می‌شود
     result = analyze_ohlcv(df, symbol, timeframe)
-    send(chat_id, format_signal(result))
+
+    candle_close_price = float(last_candle["close"])
+
+    difference_pct = (
+        (current_price - candle_close_price)
+        / candle_close_price
+    ) * 100
+
+    candle_time = datetime.fromtimestamp(
+        candle_open_ms / 1000,
+        tz=timezone.utc
+    ).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    ticker_time = datetime.fromtimestamp(
+        ticker_received_ms / 1000,
+        tz=timezone.utc
+    ).strftime("%H:%M:%S UTC")
+
+    message = (
+        format_signal(result)
+        + "\n\n"
+        + "━━━━━━━━━━━━━━\n"
+        + "🕒 وضعیت داده بازار\n"
+        + f"آخرین کندل بسته‌شده: {candle_time}\n"
+        + f"قیمت بسته‌شدن کندل: {candle_close_price}\n"
+        + f"قیمت آخرین معامله XT: {current_price}\n"
+        + f"اختلاف قیمت فعلی با کندل: {difference_pct:+.3f}%\n"
+        + f"تأخیر کندل: {candle_delay_ms / 1000:.1f} ثانیه\n"
+        + f"زمان دریافت تیکر توسط ربات: {ticker_time}\n"
+        + "━━━━━━━━━━━━━━\n"
+        + "⚠️ قیمت آخرین معامله، قیمت لحظه‌ای در زمان دریافت پاسخ API است؛ "
+        + "قیمت اجرای سفارش را تضمین نمی‌کند."
+    )
+
+    send(chat_id, message)
 
 
 def handle_message(message):
