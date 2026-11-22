@@ -1,5 +1,5 @@
 
-name: Telegram Image Analysis
+name: Telegram Image Bot
 
 on:
   workflow_dispatch:
@@ -9,19 +9,14 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: telegram-image-analysis
-  cancel-in-progress: false
-
 jobs:
-  image-analysis:
+  telegram-image:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,21 +27,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install 'opencv-python-headless>=4.9,<5' 'Pillow>=10,<13'
 
-      - name: Run Telegram image bot
+      - name: Run Telegram bot
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python bot.py image-bot
+        run: python bot.py image-bot
 
-      - name: Save Telegram update offset
+      - name: Save Telegram offset
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add telegram_image_offset.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Update Telegram image bot offset"
+          if [ -f telegram_image_offset.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add telegram_image_offset.json
+            git diff --cached --quiet || git commit -m "Update Telegram image offset"
             git push
           fi
