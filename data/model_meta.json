@@ -9,7 +9,7 @@
     "slippage_rate": 0.0003,
     "rr": 3.0
   },
-  "created_utc": "2026-11-17T21:17:56+00:00",
+  "created_utc": "2026-11-22T07:13:58+00:00",
   "approved": false,
   "chosen_rr": 3.0,
   "thresholds": {
@@ -24,7 +24,7 @@
   "best_window": {
     "label": "11:00–14:00 UTC = 14:30–17:30 به وقت تهران",
     "basis": "performance",
-    "stable": true,
+    "stable": false,
     "hours_utc": [
       11,
       12,
@@ -32,111 +32,114 @@
     ]
   },
   "reasons": [
-    "[حالت شکست] روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.57R)؛ این حالت غیرفعال شد",
-    "فقط 68 سیگنال در آزمون (حداقل 100 لازم است)",
-    "Win Rate آزمون 44.1% (کمتر از 50%)"
+    "[حالت شکست] روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.42R)؛ این حالت غیرفعال شد",
+    "فقط 46 سیگنال در آزمون (حداقل 100 لازم است)",
+    "Win Rate آزمون 32.6% (کمتر از 50%)",
+    "Profit Factor آزمون 0.88 (کمتر از 1.4)",
+    "میانگین نتیجه هر معامله پس از کارمزد منفی یا صفر است",
+    "Drawdown پورتفوی آزمون 6.2% (سقف 6%)"
   ],
   "bounds_ms": {
-    "start": 1779146640000.0,
-    "train_end": 1788628140000.0,
-    "val_end": 1791788640000.0,
-    "end": 1794949140000.0
+    "start": 1779527940000.0,
+    "train_end": 1789009476000.0,
+    "val_end": 1792169988000.0,
+    "end": 1795330500000.0
   },
   "counts": {
     "bnb_usdt": {
-      "valid_reversal": 3069,
-      "weak_reversal": 12050,
-      "true_break": 15289,
-      "false_break": 232,
+      "valid_reversal": 3206,
+      "weak_reversal": 11874,
+      "true_break": 15436,
+      "false_break": 242,
       "valid_breakout": 0,
       "weak_breakout": 0,
       "failed_breakout": 0,
       "whipsaw": 0,
-      "total": 15342,
-      "react_reversal": 5348,
-      "react_breakout": 6376,
-      "react_neutral": 3618,
+      "total": 15389,
+      "react_reversal": 5378,
+      "react_breakout": 6412,
+      "react_neutral": 3599,
       "cost_rejected": 0,
-      "pending_or_gap": 22,
+      "pending_or_gap": 10,
       "ambiguous": 0,
-      "longs": 7642,
-      "shorts": 7700
+      "longs": 7676,
+      "shorts": 7713
     },
     "btc_usdt": {
-      "valid_reversal": 2559,
-      "weak_reversal": 13046,
-      "true_break": 14292,
-      "false_break": 267,
+      "valid_reversal": 2693,
+      "weak_reversal": 12812,
+      "true_break": 14486,
+      "false_break": 285,
       "valid_breakout": 0,
       "weak_breakout": 0,
       "failed_breakout": 0,
       "whipsaw": 0,
-      "total": 15108,
-      "react_reversal": 5176,
-      "react_breakout": 6388,
-      "react_neutral": 3544,
+      "total": 15147,
+      "react_reversal": 5179,
+      "react_breakout": 6420,
+      "react_neutral": 3548,
       "cost_rejected": 0,
-      "pending_or_gap": 26,
+      "pending_or_gap": 9,
       "ambiguous": 1,
-      "longs": 7319,
-      "shorts": 7789
+      "longs": 7328,
+      "shorts": 7819
     },
     "eth_usdt": {
-      "valid_reversal": 4309,
-      "weak_reversal": 9653,
-      "true_break": 17184,
-      "false_break": 544,
+      "valid_reversal": 4435,
+      "weak_reversal": 9500,
+      "true_break": 17264,
+      "false_break": 585,
       "valid_breakout": 0,
       "weak_breakout": 0,
       "failed_breakout": 0,
       "whipsaw": 0,
-      "total": 15871,
-      "react_reversal": 5679,
-      "react_breakout": 6689,
-      "react_neutral": 3503,
+      "total": 15906,
+      "react_reversal": 5706,
+      "react_breakout": 6691,
+      "react_neutral": 3509,
       "cost_rejected": 0,
-      "pending_or_gap": 26,
+      "pending_or_gap": 14,
       "ambiguous": 10,
-      "longs": 7820,
-      "shorts": 8051
+      "longs": 7833,
+      "shorts": 8073
     },
     "sol_usdt": {
-      "valid_reversal": 5049,
-      "weak_reversal": 6509,
-      "true_break": 19307,
-      "false_break": 787,
+      "valid_reversal": 5098,
+      "weak_reversal": 6411,
+      "true_break": 19316,
+      "false_break": 823,
       "valid_breakout": 0,
       "weak_breakout": 0,
       "failed_breakout": 0,
       "whipsaw": 0,
-      "total": 15852,
-      "react_reversal": 5692,
-      "react_breakout": 6035,
-      "react_neutral": 4125,
+      "total": 15840,
+      "react_reversal": 5691,
+      "react_breakout": 6031,
+      "react_neutral": 4118,
       "cost_rejected": 0,
-      "pending_or_gap": 26,
+      "pending_or_gap": 16,
       "ambiguous": 1,
-      "longs": 7847,
-      "shorts": 8005
+      "longs": 7827,
+      "shorts": 8013
     },
     "xrp_usdt": {
-      "valid_reversal": 4908,
-      "weak_reversal": 7238,
-      "true_break": 18069,
-      "false_break": 897,
+      "valid_reversal": 5028,
+      "weak_reversal": 7065,
+      "true_break": 18088,
+      "false_break": 925,
       "valid_breakout": 0,
       "weak_breakout": 0,
       "failed_breakout": 0,
       "whipsaw": 0,
-      "total": 15583,
-      "react_reversal": 5678,
-      "react_breakout": 6033,
-      "react_neutral": 3872,
+      "total": 15564,
+      "react_reversal": 5665,
+      "react_breakout": 6039,
+      "react_neutral": 3860,
       "cost_rejected": 0,
-      "pending_or_gap": 27,
+      "pending_or_gap": 11,
       "ambiguous": 5,
-      "longs": 7699,
-      "shorts": 7884
+      "longs": 7695,
+      "shorts": 7869
     }
   },
   "data_quality": {
@@ -405,71 +408,74 @@
       },
       "gates_ok": false,
       "gate_reasons": [
-        "فقط 68 سیگنال در آزمون (حداقل 100 لازم است)",
-        "Win Rate آزمون 44.1% (کمتر از 50%)"
+        "فقط 46 سیگنال در آزمون (حداقل 100 لازم است)",
+        "Win Rate آزمون 32.6% (کمتر از 50%)",
+        "Profit Factor آزمون 0.88 (کمتر از 1.4)",
+        "میانگین نتیجه هر معامله پس از کارمزد منفی یا صفر است",
+        "Drawdown پورتفوی آزمون 6.2% (سقف 6%)"
       ],
       "signals": {
         "train": {
-          "n": 180,
-          "win_rate": 0.4166666666666667,
-          "mean_r": 0.24820738902323197,
-          "pf": 1.2987130297741352
+          "n": 194,
+          "win_rate": 0.38144329896907214,
+          "mean_r": 0.11429074062213372,
+          "pf": 1.1293012280179822
         },
         "val": {
-          "n": 60,
-          "win_rate": 0.38333333333333336,
-          "mean_r": 0.028624945863372393,
-          "pf": 1.032213057920283
+          "n": 62,
+          "win_rate": 0.43548387096774194,
+          "mean_r": 0.32610987861007545,
+          "pf": 1.3988620413749815
         },
         "test": {
-          "n": 68,
-          "win_rate": 0.4411764705882353,
-          "mean_r": 0.3513267510977841,
-          "pf": 1.4352143811427154
+          "n": 46,
+          "win_rate": 0.32608695652173914,
+          "mean_r": -0.12128283869563354,
+          "pf": 0.8759511568205245
         }
       },
       "segments": {
         "train": {
-          "trades": 31,
+          "trades": 35,
           "long": 8,
-          "short": 23,
-          "wins": 15,
-          "losses": 16,
-          "win_rate": 0.4838709677419355,
-          "net_pnl": 161.5287415700911,
-          "profit_factor": 1.6345007942030776,
-          "max_dd_pct": 0.05295267507463059,
-          "avg_win": 27.74032318478456,
-          "avg_loss": -15.911006637604824
+          "short": 27,
+          "wins": 18,
+          "losses": 17,
+          "win_rate": 0.5142857142857142,
+          "net_pnl": 237.89723697952905,
+          "profit_factor": 1.868157257206057,
+          "max_dd_pct": 0.05775060761036729,
+          "avg_win": 28.44015272602028,
+          "avg_loss": -16.119147769931526
         },
         "val": {
-          "trades": 38,
-          "long": 12,
-          "short": 26,
-          "wins": 16,
-          "losses": 22,
-          "win_rate": 0.42105263157894735,
-          "net_pnl": 68.44519923482443,
-          "profit_factor": 1.216418868733933,
-          "max_dd_pct": 0.0388514781326699,
-          "avg_win": 24.04423893078259,
-          "avg_loss": -14.375573802622595
+          "trades": 19,
+          "long": 3,
+          "short": 16,
+          "wins": 5,
+          "losses": 14,
+          "win_rate": 0.2631578947368421,
+          "net_pnl": -72.64550357920865,
+          "profit_factor": 0.6402285672020317,
+          "max_dd_pct": 0.06098911234151686,
+          "avg_win": 25.855152705414838,
+          "avg_loss": -14.422947650448775
         },
         "test": {
-          "trades": 36,
-          "long": 5,
-          "short": 31,
-          "wins": 13,
-          "losses": 23,
-          "win_rate": 0.3611111111111111,
-          "net_pnl": 4.117811274262536,
-          "profit_factor": 1.0119382376431112,
-          "max_dd_pct": 0.0572800518227071,
-          "avg_win": 26.84954145078317,
-          "avg_loss": -14.996792503735593
+          "trades": 25,
+          "long": 1,
+          "short": 24,
+          "wins": 6,
+          "losses": 19,
+          "win_rate": 0.24,
+          "net_pnl": -117.39658068551775,
+          "profit_factor": 0.5657441183381843,
+          "max_dd_pct": 0.062487037370213,
+          "avg_win": 25.49051064151492,
+          "avg_loss": -14.228402343926698
         }
       },
-      "break_even": 0.36165950031379335,
+      "break_even": 0.3625,
       "eligible": true,
       "chosen": true
     }
@@ -477,68 +483,68 @@
   "kinds": {
     "REVERSAL": {
       "n_setups": {
-        "train": 46131,
-        "val": 15742,
-        "test": 15697
+        "train": 46180,
+        "val": 15706,
+        "test": 15860
       },
       "thr": 0.275,
       "reasons": [],
       "signals": {
         "train": {
           "model": {
-            "n": 180,
-            "win_rate": 0.4166666666666667,
-            "mean_r": 0.24820738902323197,
-            "pf": 1.2987130297741354
+            "n": 194,
+            "win_rate": 0.38144329896907214,
+            "mean_r": 0.11429074062213378,
+            "pf": 1.1293012280179822
           },
           "all": {
-            "n": 46131,
-            "win_rate": 0.28601157572998637,
-            "mean_r": -0.4347209005356838,
-            "pf": 0.5069894262262267
+            "n": 46180,
+            "win_rate": 0.28614118666089217,
+            "mean_r": -0.43466955197834134,
+            "pf": 0.5081415166442532
           }
         },
         "val": {
           "model": {
-            "n": 60,
-            "win_rate": 0.38333333333333336,
-            "mean_r": 0.028624945863372393,
-            "pf": 1.032213057920283
+            "n": 62,
+            "win_rate": 0.43548387096774194,
+            "mean_r": 0.3261098786100754,
+            "pf": 1.3988620413749815
           },
           "all": {
-            "n": 15742,
-            "win_rate": 0.27486977512387245,
-            "mean_r": -0.47139437648579435,
-            "pf": 0.4750726135801802
+            "n": 15706,
+            "win_rate": 0.2752451292499682,
+            "mean_r": -0.46447355835955895,
+            "pf": 0.4826707050477469
           }
         },
         "test": {
           "model": {
-            "n": 68,
-            "win_rate": 0.4411764705882353,
-            "mean_r": 0.35132675109778405,
-            "pf": 1.4352143811427158
+            "n": 46,
+            "win_rate": 0.32608695652173914,
+            "mean_r": -0.12128283869563361,
+            "pf": 0.8759511568205248
           },
           "all": {
-            "n": 15697,
-            "win_rate": 0.29750907816780275,
-            "mean_r": -0.40733092499487444,
-            "pf": 0.5503957077876787
+            "n": 15860,
+            "win_rate": 0.3016393442622951,
+            "mean_r": -0.3854235795727973,
+            "pf": 0.5756044722435463
           }
         }
       },
-      "brier": 0.1207712715308407,
+      "brier": 0.12855646607313115,
       "calibrated": true
     },
     "BREAKOUT": {
       "n_setups": {
-        "train": 46132,
-        "val": 15739,
-        "test": 15697
+        "train": 46177,
+        "val": 15706,
+        "test": 15860
       },
       "thr": null,
       "reasons": [
-        "روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.57R)؛ این حالت غیرفعال شد"
+        "روی اعتبارسنجی هم میانگین نتیجه منفی بود (-0.42R)؛ این حالت غیرفعال شد"
       ],
       "signals": {
         "train": {
@@ -549,10 +555,10 @@
             "pf": null
           },
           "all": {
-            "n": 46132,
-            "win_rate": 0.2850299141593688,
-            "mean_r": -0.44184637026638274,
-            "pf": 0.4995670523143576
+            "n": 46177,
+            "win_rate": 0.2850769863785001,
+            "mean_r": -0.4398270566402716,
+            "pf": 0.5029313366957265
           }
         },
         "val": {
@@ -563,10 +569,10 @@
             "pf": null
           },
           "all": {
-            "n": 15739,
-            "win_rate": 0.28038630154393546,
-            "mean_r": -0.462908096846704,
-            "pf": 0.4817323360533351
+            "n": 15706,
+            "win_rate": 0.2804660639246148,
+            "mean_r": -0.4621717934811056,
+            "pf": 0.48376176628435535
           }
         },
         "test": {
@@ -577,104 +583,103 @@
             "pf": null
           },
           "all": {
-            "n": 15697,
-            "win_rate": 0.29324074663948524,
-            "mean_r": -0.4220000068007894,
-            "pf": 0.5363869349029712
+            "n": 15860,
+            "win_rate": 0.2944514501891551,
+            "mean_r": -0.4061273623899049,
+            "pf": 0.5552308244139179
           }
         }
       },
-      "brier": 0.1183637745308103,
+      "brier": 0.12504577063327812,
       "calibrated": true
     }
   },
   "auto": {
     "segments": {
       "train": {
-        "trades": 31,
+        "trades": 35,
         "long": 8,
-        "short": 23,
-        "wins": 15,
-        "losses": 16,
-        "win_rate": 0.4838709677419355,
-        "net_pnl": 161.5287415700911,
-        "profit_factor": 1.6345007942030776,
-        "max_dd_pct": 0.05295267507463059,
-        "avg_win": 27.74032318478456,
-        "avg_loss": -15.911006637604824
+        "short": 27,
+        "wins": 18,
+        "losses": 17,
+        "win_rate": 0.5142857142857142,
+        "net_pnl": 237.89723697952905,
+        "profit_factor": 1.868157257206057,
+        "max_dd_pct": 0.05775060761036729,
+        "avg_win": 28.44015272602028,
+        "avg_loss": -16.119147769931526
       },
       "val": {
-        "trades": 38,
-        "long": 12,
-        "short": 26,
-        "wins": 16,
-        "losses": 22,
-        "win_rate": 0.42105263157894735,
-        "net_pnl": 68.44519923482443,
-        "profit_factor": 1.216418868733933,
-        "max_dd_pct": 0.0388514781326699,
-        "avg_win": 24.04423893078259,
-        "avg_loss": -14.375573802622595
+        "trades": 19,
+        "long": 3,
+        "short": 16,
+        "wins": 5,
+        "losses": 14,
+        "win_rate": 0.2631578947368421,
+        "net_pnl": -72.64550357920865,
+        "profit_factor": 0.6402285672020317,
+        "max_dd_pct": 0.06098911234151686,
+        "avg_win": 25.855152705414838,
+        "avg_loss": -14.422947650448775
       },
       "test": {
-        "trades": 36,
-        "long": 5,
-        "short": 31,
-        "wins": 13,
-        "losses": 23,
-        "win_rate": 0.3611111111111111,
-        "net_pnl": 4.117811274262536,
-        "profit_factor": 1.0119382376431112,
-        "max_dd_pct": 0.0572800518227071,
-        "avg_win": 26.84954145078317,
-        "avg_loss": -14.996792503735593
+        "trades": 25,
+        "long": 1,
+        "short": 24,
+        "wins": 6,
+        "losses": 19,
+        "win_rate": 0.24,
+        "net_pnl": -117.39658068551775,
+        "profit_factor": 0.5657441183381843,
+        "max_dd_pct": 0.062487037370213,
+        "avg_win": 25.49051064151492,
+        "avg_loss": -14.228402343926698
       }
     },
     "skipped": {
       "train": {
-        "symbol_open": 13,
-        "max_open": 24,
-        "daily_loss": 1,
-        "drawdown": 111
+        "symbol_open": 14,
+        "max_open": 22,
+        "drawdown": 123
       },
       "val": {
-        "symbol_open": 18,
-        "max_open": 4
+        "symbol_open": 9,
+        "max_open": 3,
+        "drawdown": 31
       },
       "test": {
-        "symbol_open": 20,
-        "daily_loss": 6,
-        "max_open": 1,
-        "drawdown": 5
+        "symbol_open": 16,
+        "daily_loss": 4,
+        "drawdown": 1
       }
     },
     "signals": {
       "train": {
-        "n": 180,
-        "win_rate": 0.4166666666666667,
-        "mean_r": 0.24820738902323197,
-        "pf": 1.2987130297741352
+        "n": 194,
+        "win_rate": 0.38144329896907214,
+        "mean_r": 0.11429074062213372,
+        "pf": 1.1293012280179822
       },
       "val": {
-        "n": 60,
-        "win_rate": 0.38333333333333336,
-        "mean_r": 0.028624945863372393,
-        "pf": 1.032213057920283
+        "n": 62,
+        "win_rate": 0.43548387096774194,
+        "mean_r": 0.32610987861007545,
+        "pf": 1.3988620413749815
       },
       "test": {
-        "n": 68,
-        "win_rate": 0.4411764705882353,
-        "mean_r": 0.3513267510977841,
-        "pf": 1.4352143811427154
+        "n": 46,
+        "win_rate": 0.32608695652173914,
+        "mean_r": -0.12128283869563354,
+        "pf": 0.8759511568205245
       }
     },
     "by_kind": {
       "train": {
         "REVERSAL": {
-          "n": 180,
-          "win_rate": 0.4166666666666667,
-          "mean_r": 0.24820738902323197,
-          "pf": 1.2987130297741352
+          "n": 194,
+          "win_rate": 0.38144329896907214,
+          "mean_r": 0.11429074062213372,
+          "pf": 1.1293012280179822
         },
         "BREAKOUT": {
           "n": 0,
@@ -685,10 +690,10 @@
       },
       "val": {
         "REVERSAL": {
-          "n": 60,
-          "win_rate": 0.38333333333333336,
-          "mean_r": 0.028624945863372393,
-          "pf": 1.032213057920283
+          "n": 62,
+          "win_rate": 0.43548387096774194,
+          "mean_r": 0.32610987861007545,
+          "pf": 1.3988620413749815
         },
         "BREAKOUT": {
           "n": 0,
@@ -699,10 +704,10 @@
       },
       "test": {
         "REVERSAL": {
-          "n": 68,
-          "win_rate": 0.4411764705882353,
-          "mean_r": 0.3513267510977841,
-          "pf": 1.4352143811427154
+          "n": 46,
+          "win_rate": 0.32608695652173914,
+          "mean_r": -0.12128283869563354,
+          "pf": 0.8759511568205245
         },
         "BREAKOUT": {
           "n": 0,
@@ -714,28 +719,28 @@
     },
     "all_setups": {
       "train": {
-        "n": 92263,
-        "win_rate": 0.2855207396247683,
-        "mean_r": -0.43828367401602386,
-        "pf": 0.5032757588885823
+        "n": 92357,
+        "win_rate": 0.2856091038037182,
+        "mean_r": -0.4372482205446,
+        "pf": 0.5055348722038155
       },
       "val": {
-        "n": 31481,
-        "win_rate": 0.27762777548362505,
-        "mean_r": -0.46715164101869855,
-        "pf": 0.4783931695339908
+        "n": 31412,
+        "win_rate": 0.2778555965872915,
+        "mean_r": -0.4633226759203323,
+        "pf": 0.4832154564555653
       },
       "test": {
-        "n": 31394,
-        "win_rate": 0.295374912403644,
-        "mean_r": -0.41466546589783193,
-        "pf": 0.5433748717703868
+        "n": 31720,
+        "win_rate": 0.2980453972257251,
+        "mean_r": -0.3957754709813511,
+        "pf": 0.5653899692553767
       }
     },
-    "cost_r": 0.4466380012551734,
-    "break_even": 0.36165950031379335
+    "cost_r": 0.4499999999999999,
+    "break_even": 0.3625
   },
-  "purged": 120,
+  "purged": 83,
   "costs": {
     "fee_rate": 0.0006,
     "slippage_rate": 0.0003,
