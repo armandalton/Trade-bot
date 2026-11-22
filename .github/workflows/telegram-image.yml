@@ -1,23 +1,19 @@
 
-name: Telegram Image Bot
+name: Telegram Live Webhook Bot
 
 on:
   workflow_dispatch:
     inputs:
-      update_id:
-        description: "Telegram update ID"
-        required: false
+      update_json:
+        description: "Telegram update payload"
+        required: true
         type: string
 
-  schedule:
-    - cron: "*/5 * * * *"
-
 permissions:
-  contents: write
-  actions: write
+  contents: read
 
 jobs:
-  telegram-image:
+  telegram:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -36,18 +32,9 @@ jobs:
           pip install -r requirements.txt
           pip install 'opencv-python-headless>=4.9,<5' 'Pillow>=10,<13'
 
-      - name: Run Telegram bot
+      - name: Process Telegram update
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python bot.py image-bot
-
-      - name: Save Telegram offset
-        run: |
-          if [ -f telegram_image_offset.json ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add telegram_image_offset.json
-            git diff --cached --quiet || git commit -m "Update Telegram image offset"
-            git push
-          fi
+          TELEGRAM_UPDATE_JSON: ${{ inputs.update_json }}
+        run: python bot.py webhook
