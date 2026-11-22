@@ -3,11 +3,18 @@ name: Telegram Image Bot
 
 on:
   workflow_dispatch:
+    inputs:
+      update_id:
+        description: "Telegram update ID"
+        required: false
+        type: string
+
   schedule:
     - cron: "*/5 * * * *"
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   telegram-image:
