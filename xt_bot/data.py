@@ -92,3 +92,42 @@ def validate_candles(df, interval_ms=INTERVAL_MS):
             "max_gap_candles": int(diffs.max() // interval_ms),
             "coverage": float(len(df) / expected),
             "ok": bool((diffs > 0).all() and len(df) / expected >= 0.97)}
+    
+def fetch_last_price(symbol, session=None):
+    """Fetch latest traded futures price from XT public ticker."""
+    session = session or requests.Session()
+    url = BASE + "/future/market/v1/public/q/tickers"
+
+    response = session.get(url, timeout=15)
+    response.raise_for_status()
+
+    payload = response.json()
+
+    if payload.get("returnCode") not in (0, "0", None):
+        raise RuntimeError(
+            f"XT ticker API error: {payload.get('msgInfo')}"
+        )
+
+    tickers = payload.get("result") or []
+
+    if isinstance(tickers, dict):
+        tickers = tickers.get("items") or []
+
+    wanted = symbol.strip().lower()
+
+    for item in tickers:
+        if str(item.get("s", "")).lower() == wanted:
+            price = float(item["c"])
+
+            if not np.isfinite(price) or price <= 0:
+                raise RuntimeError("Invalid XT last price")
+
+            return {
+                "symbol": wanted,
+                "price": price,
+                "received_at_ms": int(time.time() * 1000),
+            }
+
+    raise RuntimeError(
+        f"Ticker not found for symbol: {wanted}"
+    )
